@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>love</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="heart">
+      <i class="fa-solid fa-heart"></i>
+    </div>
+    <div class="beloved"></div>
+
+    <!-- Embedded Audio -->
+    <audio id="bg-music">
+      <source src="terasath.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        let music = document.getElementById("bg-music");
+        music.volume = 1.0; // Set volume (1.0 = 100%)
+
+        // Check if the user came from index.html
+        if (localStorage.getItem("playAudio") === "true") {
+          document.addEventListener("click", () => {
+            music.play().catch(error => {
+              console.error("Autoplay blocked:", error);
+            });
+          }, { once: true });
+
+          // Remove flag after clicking
+          localStorage.removeItem("playAudio");
+        }
+      });
+    </script>
+  </body>
+</html>
